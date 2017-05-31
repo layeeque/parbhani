@@ -1,9 +1,10 @@
-'use strict';
+
 
 const express = require('express');
 const bodyParser = require('body-parser');
-
+var https = require('https');
 const restService = express();
+var data1="";
 
 restService.use(bodyParser.urlencoded({
     extended: true
@@ -11,14 +12,84 @@ restService.use(bodyParser.urlencoded({
 
 restService.use(bodyParser.json());
 
-restService.post('/echo', function(req, res) {
-    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
-    return res.json({
-        speech: speech,
-        displayText: speech,
-        source: 'webhook-echo-sample'
+restService.get('/echo', function(req, res) {
+    var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q=encodeURIComponent(hrithik)";
+    
+  
+         https.get(api, (response) => {
+             var body = "";
+              response.on('data', (chunk) => { body += chunk })
+              response.on('end', () => {
+                  //var bodya=body.items
+                  console.log("body: "+body);
+             //  var bodya = body.searchInformation.totalResults;
+                   //return res.json(bodya);
+                 var obj =JSON.parse(body).items;
+                // var obj1=JSON.parse(obj).title;
+              //  console.log("===================================================================================");   
+                
+                  console.log("obj : "+obj)
+                // console.log("obj1 : "+obj1)
+                   return res.json(obj);
+              })
+            })
     });
-});
+
+   // var q = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+  
+  //var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyDcpIw1u0qoDICOZsYMiKrxuLCHUstzIT4&cx=000792015022037580768:80cf2nj_1g0&q=encodeURIComponent(salman)";
+//var response="";
+//var content="";
+
+// var data1=""
+//   var body = "";
+//             https.get(api, (response) => {
+//               response.on('data', (chunk) => { body += chunk })
+//               response.on('end', () => {
+//                 data = JSON.parse(body);
+//                 console.log("Data : "+data);
+//                 data1=data;
+//               })
+//             })
+
+//console.log(body);
+//console.log(data);
+  //try {
+
+    // response = UrlFetchApp.fetch(api, {
+    //  muteHttpExceptions: true
+   // });
+     // content = JSON.parse(response);
+    //if (response.getResponseCode() == 200) {
+
+     // var content = JSON.parse(response);
+ 
+    //   // Did the search return any results?
+    //   if (content.searchInformation.totalResults > 0) {
+
+    //     var count = content.items.length;
+
+    //     for (var i = 0; i < count; i++) {
+
+    //       // Save the page title, description and hyperlink
+    //       Logger.log(content.items[i].title);
+    //       Logger.log(content.items[i].snippet);
+    //       Logger.log(content.items[i].link);
+    //     }
+    //   }
+   //}
+ // } catch (f) {
+   //Logger.log(f.toString());
+  //}
+  
+  
+  
+    // return res.json({
+    //     speech: "danish".concat(data1),
+    //     displayText: "danish".concat(data1),
+    //     source: 'webhook-echo-sample'
+    // });
+//});
 
 restService.post('/slack-test', function(req, res) {
 
