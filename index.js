@@ -12,7 +12,7 @@ restService.use(bodyParser.urlencoded({
 
 restService.use(bodyParser.json());
 
-restService.get('/echo', function(req, res) {
+restService.post('/echo', function(req, res) {
 
      var c = req.body.result.parameters.any;
     var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q=encodeURIComponent("+c+")";
@@ -32,7 +32,11 @@ restService.get('/echo', function(req, res) {
                 
                   console.log("obj : "+obj)
                 // console.log("obj1 : "+obj1)
-                   return res.json(obj);
+                   return res.json({
+        speech: obj,
+        displayText: obj,
+        source: 'webhook-echo-sample'
+    });
               })
             })
     });
