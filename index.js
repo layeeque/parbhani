@@ -13,7 +13,9 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.get('/echo', function(req, res) {
-    var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q=encodeURIComponent(hrithik)";
+
+     var c = req.body.result.parameters.any;
+    var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q=encodeURIComponent("+c+")";
     
   
          https.get(api, (response) => {
