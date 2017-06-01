@@ -14,7 +14,7 @@ restService.use(bodyParser.json());
 
 restService.post('/echo', function(req, res) {
         var obj="";
-    // var q = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+     var q = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
     var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q=encodeURIComponent(india)";
     
   
@@ -33,7 +33,7 @@ restService.post('/echo', function(req, res) {
                   console.log("obj : "+obj)
                 // console.log("obj1 : "+obj1)
                    return res.json({
-        speech: "hi i am in speech",
+        speech: "hiii ".concat(q),
         displayText: "i am in displaytext",
         source: 'webhook-echo-sample'
     });
