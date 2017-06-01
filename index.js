@@ -15,7 +15,7 @@ restService.use(bodyParser.json());
 restService.post('/echo', function(req, res) {
         var obj="";
      var q = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
-    var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q=encodeURIComponent(india)";
+    var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q=encodeURIComponent("+q+")";
     
   
          https.get(api, (response) => {
@@ -23,17 +23,17 @@ restService.post('/echo', function(req, res) {
               response.on('data', (chunk) => { body += chunk })
               response.on('end', () => {
                   //var bodya=body.items
-                  console.log("body: "+body);
+                  //console.log("body: "+body);
              //  var bodya = body.searchInformation.totalResults;
                    //return res.json(bodya);
                  obj =JSON.parse(body).title;
                 // var obj1=JSON.parse(obj).title;
               //  console.log("===================================================================================");   
                 
-                  console.log("obj : "+obj)
+                  //console.log("obj : "+obj)
                 // console.log("obj1 : "+obj1)
                    return res.json({
-        speech: "hiii ".concat(q),
+        speech: "hiii ".concat(obj),
         displayText: "i am in displaytext",
         source: 'webhook-echo-sample'
     });
