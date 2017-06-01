@@ -26,7 +26,7 @@ restService.post('/echo', function(req, res) {
                   //console.log("body: "+body);
              //  var bodya = body.searchInformation.totalResults;
                    //return res.json(bodya);
-                 obj =JSON.parse(body).title;
+                 obj =JSON.parse(body).items;
                 // var obj1=JSON.parse(obj).title;
               //  console.log("===================================================================================");   
                 
