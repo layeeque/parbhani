@@ -14,10 +14,11 @@ restService.use(bodyParser.json());
 
 restService.post('/echo', function(req, res) {
 
-     //var c = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again";
-     var c = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+    
+     //var c = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+     var c="india";
      var obj="";
-    //var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q=encodeURIComponent("+c+")";
+  //  //var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q=encodeURIComponent("+c+")";
     var api = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAbMVp_Kmi6Ixrh6RfVLAbW_mMAY0O7itQ&cx=013351406654656600973:5gj2eij-z1i&q="+c;
     
   
@@ -26,24 +27,24 @@ restService.post('/echo', function(req, res) {
               response.on('data', (chunk) => { body += chunk })
               response.on('end', () => {
                console.log("===================================================================================");   
-                  //var bodya=body.items
+                 //var bodya=body.items
                   console.log("body: "+body);
-             //  var bodya = body.searchInformation.totalResults;
-                   //return res.json(bodya);
+            //  var bodya = body.searchInformation.totalResults;
+                  //return res.json(bodya);
               obj =JSON.parse(body);
-                // var obj1=JSON.parse(obj).title;
+               // var obj1=JSON.parse(obj).title;
              
                 
                   //console.log(body
 //.displayText.items[0].snipppet
 //)
                 // console.log("obj1 : "+obj1)
-    //               return res.json({
-    //          speech: obj,
-    //          displayText: obj,
-    //          source: 'webhook-echo-sample'
-    //  });
-    return res.json(obj.items[0].snippet);
+                return res.json({
+            speech: obj.items[0].snippet,
+             displayText: obj.items[0].snippet,
+          source: 'webhook-echo-sample'
+      });
+   // return res.json(obj.items[0].snippet);
       //return res.json(obj);
               })
             })
